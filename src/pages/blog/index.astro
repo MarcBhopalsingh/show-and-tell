@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PostCard from "../../components/PostCard.astro";
+import { SITE } from "../../config";
 
 const posts = (await getCollection("blog"))
 	.filter((p) => !p.data.draft)
@@ -10,7 +11,7 @@ const posts = (await getCollection("blog"))
 
 <Layout
 	title="Writing"
-	description="Notes on software, hardware, and automation by Marc."
+	description={`Notes on software, hardware, and automation by ${SITE.author}.`}
 >
 	<header class="container page-head">
 		<p class="eyebrow">Writing</p>

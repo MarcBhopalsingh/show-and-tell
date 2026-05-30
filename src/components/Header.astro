@@ -1,4 +1,6 @@
 ---
+import { SITE } from "../config";
+
 const links = [
 	{ href: "/projects", label: "Projects" },
 	{ href: "/blog", label: "Writing" },
@@ -12,7 +14,7 @@ const isActive = (href: string) =>
 
 <header class="site-header">
 	<div class="container bar">
-		<a href="/" class="brand">Marc</a>
+		<a href="/" class="brand">{SITE.author}</a>
 		<nav aria-label="Primary">
 			<ul>
 				{

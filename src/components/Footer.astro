@@ -1,14 +1,16 @@
 ---
+import { SITE } from "../config";
+
 const year = new Date().getFullYear();
 const socials = [
-	{ href: "https://github.com", label: "GitHub" },
-	{ href: "mailto:hello@example.com", label: "Email" },
+	{ href: SITE.github, label: "GitHub" },
+	{ href: `mailto:${SITE.email}`, label: "Email" },
 ];
 ---
 
 <footer class="site-footer">
 	<div class="container bar">
-		<p class="muted">&copy; {year} Marc</p>
+		<p class="muted">&copy; {year} {SITE.author}</p>
 		<ul>
 			{
 				socials.map((social) => (

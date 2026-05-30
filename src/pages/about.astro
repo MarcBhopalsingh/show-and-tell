@@ -1,14 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { SITE } from "../config";
 ---
 
 <Layout
 	title="About"
-	description="A little about Marc and this site."
+	description={`A little about ${SITE.author} and this site.`}
 >
 	<article class="container about">
 		<p class="eyebrow">About</p>
-		<h1>Hi, I'm Marc.</h1>
+		<h1>Hi, I'm {SITE.author}.</h1>
 		<div class="prose">
 			<p>
 				I make small things and write about them. Most of what I build lives at
@@ -23,8 +24,8 @@ import Layout from "../layouts/Layout.astro";
 			</p>
 			<p>
 				Want to say hi? Find me on
-				<a href="https://github.com">GitHub</a> or drop a line at
-				<a href="mailto:hello@example.com">hello@example.com</a>.
+				<a href={SITE.github}>GitHub</a> or drop a line at
+				<a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
 			</p>
 		</div>
 	</article>
