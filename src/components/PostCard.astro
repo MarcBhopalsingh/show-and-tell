@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, description, date } = post.data;
+
+const formattedDate = date.toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+---
+
+<a href={`/blog/${post.id}`} class="card">
+	<time datetime={date.toISOString()} class="date">{formattedDate}</time>
+	<h3>{title}</h3>
+	<p class="muted summary">{description}</p>
+	<span class="read">Read &rarr;</span>
+</a>
+
+<style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		padding-block: var(--space-6);
+		border-bottom: 1px solid var(--color-border);
+		color: var(--color-text);
+		transition: opacity var(--transition);
+	}
+
+	.card:hover {
+		text-decoration: none;
+	}
+
+	.card:hover h3 {
+		color: var(--color-accent);
+	}
+
+	.date {
+		font-size: var(--text-xs);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+	}
+
+	h3 {
+		font-size: var(--text-xl);
+		transition: color var(--transition);
+	}
+
+	.summary {
+		font-size: var(--text-base);
+	}
+
+	.read {
+		font-size: var(--text-sm);
+		font-weight: 600;
+		color: var(--color-accent);
+		margin-top: var(--space-1);
+	}
+</style>

@@ -1,0 +1,117 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = (async () => {
+	const posts = await getCollection("blog");
+	return posts
+		.filter((p) => !p.data.draft)
+		.map((post) => ({
+			params: { slug: post.id },
+			props: { post },
+		}));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, date, tags } = post.data;
+
+const formattedDate = date.toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+---
+
+<Layout title={title} description={description}>
+	<article class="container article">
+		<a href="/blog" class="back">&larr; Writing</a>
+		<header class="head">
+			<time datetime={date.toISOString()} class="eyebrow">{formattedDate}</time>
+			<h1>{title}</h1>
+			<p class="summary muted">{description}</p>
+			{
+				tags.length > 0 && (
+					<ul class="tags">
+						{tags.map((tag) => (
+							<li>{tag}</li>
+						))}
+					</ul>
+				)
+			}
+		</header>
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.article {
+		max-width: var(--measure);
+		padding-block: var(--space-12) var(--space-8);
+	}
+
+	.back {
+		font-size: var(--text-sm);
+		font-weight: 600;
+	}
+
+	.head {
+		margin-block: var(--space-6) var(--space-8);
+		padding-bottom: var(--space-8);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.head h1 {
+		margin-top: var(--space-3);
+	}
+
+	.summary {
+		font-size: var(--text-lg);
+		margin-top: var(--space-4);
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		list-style: none;
+		padding: 0;
+		margin-top: var(--space-6);
+	}
+
+	.tags li {
+		font-size: var(--text-xs);
+		color: var(--color-text-muted);
+		background: var(--color-surface);
+		padding: 0.2em 0.6em;
+		border-radius: 999px;
+	}
+</style>
+
+<style is:global>
+	.prose > * + * {
+		margin-top: var(--space-4);
+	}
+
+	.prose h2 {
+		font-size: var(--text-2xl);
+		margin-top: var(--space-12);
+	}
+
+	.prose h3 {
+		font-size: var(--text-xl);
+		margin-top: var(--space-8);
+	}
+
+	.prose ul,
+	.prose ol {
+		padding-left: var(--space-6);
+	}
+
+	.prose li + li {
+		margin-top: var(--space-2);
+	}
+</style>

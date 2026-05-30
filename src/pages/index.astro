@@ -1,11 +1,132 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import PostCard from "../components/PostCard.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const byDateDesc = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
+	b.data.date.valueOf() - a.data.date.valueOf();
+
+const projects = (await getCollection("projects")).sort(byDateDesc);
+const featured = projects.filter((p) => p.data.featured).slice(0, 3);
+const recentProjects = featured.length > 0 ? featured : projects.slice(0, 3);
+
+const posts = (await getCollection("blog"))
+	.filter((p) => !p.data.draft)
+	.sort(byDateDesc)
+	.slice(0, 3);
 ---
 
 <Layout>
-	<Welcome />
+	<section class="hero container">
+		<p class="eyebrow">Maker &middot; Tinkerer &middot; Writer</p>
+		<h1>I build small software, hardware, and automations — then write about them.</h1>
+		<p class="lead muted">
+			Show &amp; Tell is where I collect the things I make: Raspberry Pi projects,
+			little apps, the automations that quietly run my day, and notes on how they
+			came together.
+		</p>
+		<div class="actions">
+			<a href="/projects" class="btn btn-primary">View projects</a>
+			<a href="/blog" class="btn">Read writing</a>
+		</div>
+	</section>
+
+	<section class="container section">
+		<div class="section-head">
+			<h2>Selected projects</h2>
+			<a href="/projects">All projects &rarr;</a>
+		</div>
+		<div class="grid">
+			{recentProjects.map((project) => <ProjectCard project={project} />)}
+		</div>
+	</section>
+
+	<section class="container section">
+		<div class="section-head">
+			<h2>Latest writing</h2>
+			<a href="/blog">All writing &rarr;</a>
+		</div>
+		<div class="posts">
+			{posts.map((post) => <PostCard post={post} />)}
+		</div>
+	</section>
 </Layout>
+
+<style>
+	.hero {
+		padding-block: var(--space-24) var(--space-16);
+		max-width: 56rem;
+	}
+
+	.hero h1 {
+		margin-top: var(--space-3);
+	}
+
+	.lead {
+		font-size: var(--text-lg);
+		margin-top: var(--space-6);
+		max-width: var(--measure);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-4);
+		margin-top: var(--space-8);
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.7em 1.4em;
+		border-radius: var(--radius);
+		border: 1px solid var(--color-border);
+		font-weight: 600;
+		font-size: var(--text-sm);
+		color: var(--color-text);
+		transition:
+			background var(--transition),
+			border-color var(--transition);
+	}
+
+	.btn:hover {
+		text-decoration: none;
+		border-color: var(--color-accent);
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		border-color: var(--color-accent);
+		color: #fff;
+	}
+
+	.btn-primary:hover {
+		opacity: 0.9;
+	}
+
+	.section-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-4);
+		margin-bottom: var(--space-8);
+	}
+
+	.section-head a {
+		font-size: var(--text-sm);
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+		gap: var(--space-6);
+	}
+
+	.posts {
+		display: flex;
+		flex-direction: column;
+	}
+</style>

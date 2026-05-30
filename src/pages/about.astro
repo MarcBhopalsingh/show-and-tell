@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+	title="About"
+	description="A little about Marc and this site."
+>
+	<article class="container about">
+		<p class="eyebrow">About</p>
+		<h1>Hi, I'm Marc.</h1>
+		<div class="prose">
+			<p>
+				I make small things and write about them. Most of what I build lives at
+				the intersection of software and the physical world — a Raspberry Pi on
+				the desk, an automation that runs while I sleep, a little app that
+				scratches one specific itch.
+			</p>
+			<p>
+				This site is my show-and-tell shelf. Nothing here is trying to be a
+				product. It's a place to keep the experiments and the notes, mostly so I
+				remember what I learned.
+			</p>
+			<p>
+				Want to say hi? Find me on
+				<a href="https://github.com">GitHub</a> or drop a line at
+				<a href="mailto:hello@example.com">hello@example.com</a>.
+			</p>
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.about {
+		max-width: var(--measure);
+		padding-block: var(--space-16) var(--space-8);
+	}
+
+	.about h1 {
+		margin-top: var(--space-3);
+		margin-bottom: var(--space-6);
+	}
+</style>
+
+<style is:global>
+	.about .prose > * + * {
+		margin-top: var(--space-4);
+	}
+</style>

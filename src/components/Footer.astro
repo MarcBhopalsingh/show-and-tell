@@ -1,0 +1,54 @@
+---
+const year = new Date().getFullYear();
+const socials = [
+	{ href: "https://github.com", label: "GitHub" },
+	{ href: "mailto:hello@example.com", label: "Email" },
+];
+---
+
+<footer class="site-footer">
+	<div class="container bar">
+		<p class="muted">&copy; {year} Marc</p>
+		<ul>
+			{
+				socials.map((social) => (
+					<li>
+						<a href={social.href}>{social.label}</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		border-top: 1px solid var(--color-border);
+		padding-block: var(--space-8);
+		margin-top: var(--space-24);
+	}
+
+	.bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		flex-wrap: wrap;
+		font-size: var(--text-sm);
+	}
+
+	ul {
+		display: flex;
+		gap: var(--space-6);
+		list-style: none;
+		padding: 0;
+	}
+
+	.bar a {
+		color: var(--color-text-muted);
+	}
+
+	.bar a:hover {
+		color: var(--color-accent);
+	}
+</style>
