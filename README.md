@@ -31,6 +31,20 @@ Personal info (name, email, links) is read from environment variables so it stay
 
 `.env` is gitignored. If a variable is omitted, the placeholder defaults defined in [`astro.config.mjs`](astro.config.mjs) are used, so the site builds fine without one. For production, set these same variables in your deploy host's environment settings.
 
+## Deployment
+
+The site is deployed to **GitHub Pages** via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). Every push to `main` builds with [`withastro/action`](https://github.com/withastro/action) and publishes to Pages.
+
+Because it's a project page, the site is served from a subpath — `https://marcbhopalsingh.github.io/show-and-tell/` — so `site` and `base` are set in [`astro.config.mjs`](astro.config.mjs), and all internal links go through the `url()` helper in [`src/utils/url.ts`](src/utils/url.ts).
+
+One-time setup:
+
+1. In the repo, go to **Settings → Pages** and set **Source** to **GitHub Actions**.
+2. (Optional) Add your site identity under **Settings → Secrets and variables → Actions → Variables**: `SITE_AUTHOR`, `SITE_DESCRIPTION`, `SITE_EMAIL`, `SITE_GITHUB`. These are baked into the static HTML at build time (they are public, not secret). If omitted, the defaults in `astro.config.mjs` are used.
+3. Push to `main` (or run the workflow manually from the Actions tab).
+
+To use a custom domain served at the root instead, remove `site`/`base` from `astro.config.mjs` and follow [Astro's custom domain guide](https://docs.astro.build/en/guides/deploy/github/).
+
 ## Adding content
 
 Content lives in `src/content/`. Each entry is a Markdown file with frontmatter validated by the schemas in [`src/content.config.ts`](src/content.config.ts).

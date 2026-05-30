@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { url } from "../utils/url";
 
 interface Props {
 	post: CollectionEntry<"blog">;
@@ -15,7 +16,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
 });
 ---
 
-<a href={`/blog/${post.id}`} class="card">
+<a href={url(`/blog/${post.id}`)} class="card">
 	<time datetime={date.toISOString()} class="date">{formattedDate}</time>
 	<h3>{title}</h3>
 	<p class="muted summary">{description}</p>

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { url } from "../utils/url";
 
 interface Props {
 	project: CollectionEntry<"projects">;
@@ -15,7 +16,7 @@ const categoryLabels: Record<string, string> = {
 };
 ---
 
-<a href={`/projects/${project.id}`} class="card">
+<a href={url(`/projects/${project.id}`)} class="card">
 	<span class="category">{categoryLabels[category] ?? category}</span>
 	<h3>{title}</h3>
 	<p class="muted summary">{summary}</p>

@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
+import { url } from "../../utils/url";
 
 export const getStaticPaths = (async () => {
 	const projects = await getCollection("projects");
@@ -29,7 +30,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
 <Layout title={title} description={summary}>
 	<article class="container article">
-		<a href="/projects" class="back">&larr; Projects</a>
+		<a href={url("/projects")} class="back">&larr; Projects</a>
 		<header class="head">
 			<p class="eyebrow">{categoryLabels[category] ?? category}</p>
 			<h1>{title}</h1>

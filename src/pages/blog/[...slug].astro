@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
+import { url } from "../../utils/url";
 
 export const getStaticPaths = (async () => {
 	const posts = await getCollection("blog");
@@ -26,7 +27,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
 <Layout title={title} description={description}>
 	<article class="container article">
-		<a href="/blog" class="back">&larr; Writing</a>
+		<a href={url("/blog")} class="back">&larr; Writing</a>
 		<header class="head">
 			<time datetime={date.toISOString()} class="eyebrow">{formattedDate}</time>
 			<h1>{title}</h1>
