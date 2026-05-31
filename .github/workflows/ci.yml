@@ -27,6 +27,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          SITE_AUTHOR: ${{ vars.SITE_AUTHOR }}
+          SITE_DESCRIPTION: ${{ vars.SITE_DESCRIPTION }}
+          SITE_EMAIL: ${{ vars.SITE_EMAIL }}
+          SITE_GITHUB: ${{ vars.SITE_GITHUB }}
+          SITE_LINKEDIN: ${{ vars.SITE_LINKEDIN }}
 
   lint:
     runs-on: ubuntu-latest
