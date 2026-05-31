@@ -30,6 +30,11 @@ export default defineConfig({
         access: "public",
         default: "https://github.com",
       }),
+      SITE_LINKEDIN: envField.string({
+        context: "client",
+        access: "public",
+        default: "https://www.linkedin.com/in/marcbhopalsingh/",
+      }),
     },
   },
 });

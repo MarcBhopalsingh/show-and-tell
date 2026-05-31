@@ -18,13 +18,17 @@ I also love writing, so it feels like a win-win.
 
 [Astro](https://astro.build/)
 
-Since this is a mainly a means to showcase content, I'm trying out [Astro](https://astro.build/) as the framework
+Since this website is to showcase my projects, I'm trying out [Astro](https://astro.build/) as the framework
 powering this website.
 Astro is a framework designed for building content focused websites and I found that it fit my
 needs quite well.
 
-Firstly, I wanted this to be a project that I can easily update, publish etc.
+Firstly, I want this website to be easy to update, publish etc. Since Astro supports markdown files natively,
+it significantly reduces the maintenance burden for adding new content.
 
-I'm a big fan of using Markdown files to format the content since it can live in my codebase.
+[CI/CD](https://github.com/MarcBhopalsingh/show-and-tell/tree/main/.github/workflows)
 
-[CI/CD]()
+I'm using Github Actions + Github Pages for:
+
+- build, lint and test jobs
+- hosting this website
