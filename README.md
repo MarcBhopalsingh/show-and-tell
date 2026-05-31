@@ -1,6 +1,8 @@
 # Show & Tell
 
-A content-driven personal portfolio built with [Astro](https://astro.build). It collects software projects, hardware/Raspberry Pi builds, automations, and writing — adding a new entry is just dropping a Markdown file into `src/content/`.
+A content-driven personal portfolio built with [Astro](https://astro.build). It collects software projects, hardware/Raspberry Pi builds, home automation etc.
+
+Adding a new entry is just dropping a Markdown file into `src/content/`.
 
 ## Tech stack
 
@@ -22,12 +24,13 @@ npm run dev        # start the dev server at localhost:4321
 
 Personal info (name, email, links) is read from environment variables so it stays out of the repo. Copy `.env.example` to `.env` and fill in your values:
 
-| Variable           | Description                          |
-| :----------------- | :----------------------------------- |
+| Variable           | Description                           |
+| :----------------- | :------------------------------------ |
 | `SITE_AUTHOR`      | Your name, shown in the header/footer |
-| `SITE_DESCRIPTION` | Default meta description / tagline   |
-| `SITE_EMAIL`       | Contact email (used for `mailto:`)   |
-| `SITE_GITHUB`      | Your GitHub profile URL              |
+| `SITE_DESCRIPTION` | Default meta description / tagline    |
+| `SITE_EMAIL`       | Contact email (used for `mailto:`)    |
+| `SITE_GITHUB`      | Your GitHub profile URL               |
+| `SITE_LINKEDIN`    | Your LinkedIn profile URL             |
 
 `.env` is gitignored. If a variable is omitted, the placeholder defaults defined in [`astro.config.mjs`](astro.config.mjs) are used, so the site builds fine without one. For production, set these same variables in your deploy host's environment settings.
 
@@ -105,10 +108,10 @@ The file name becomes the URL slug (e.g. `/projects/my-project`, `/blog/my-post`
 
 All commands are run from the root of the project:
 
-| Command            | Action                                       |
-| :----------------- | :------------------------------------------- |
-| `npm run dev`      | Start local dev server at `localhost:4321`   |
-| `npm run build`    | Build the production site to `./dist/`       |
-| `npm run preview`  | Preview the production build locally         |
-| `npm run lint`     | Lint with ESLint                             |
-| `npm run lint:fix` | Lint and auto-fix where possible             |
+| Command            | Action                                     |
+| :----------------- | :----------------------------------------- |
+| `npm run dev`      | Start local dev server at `localhost:4321` |
+| `npm run build`    | Build the production site to `./dist/`     |
+| `npm run preview`  | Preview the production build locally       |
+| `npm run lint`     | Lint with ESLint                           |
+| `npm run lint:fix` | Lint and auto-fix where possible           |
